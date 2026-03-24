@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'add_child_page.dart';
+import 'package:vacc/screens/vaccination_page.dart';
+import 'package:vacc/screens/appointment_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -46,7 +48,12 @@ class HomePage extends StatelessWidget {
                 leading: Icon(Icons.calendar_today),
                 title: Text("Vaccination Schedule"),
                 trailing: Icon(Icons.arrow_forward),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+  context,
+  MaterialPageRoute(builder: (_) => VaccinationPage()),
+);
+                },
               ),
             ),
 
@@ -55,7 +62,12 @@ class HomePage extends StatelessWidget {
                 leading: Icon(Icons.event),
                 title: Text("Appointments"),
                 trailing: Icon(Icons.arrow_forward),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+  context,
+  MaterialPageRoute(builder: (_) => AppointmentPage()),
+);
+                },
               ),
             ),
           ],
