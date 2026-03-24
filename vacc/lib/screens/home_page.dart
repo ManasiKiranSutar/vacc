@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'add_child_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -31,7 +32,12 @@ class HomePage extends StatelessWidget {
                 leading: Icon(Icons.child_care),
                 title: Text("Add Child"),
                 trailing: Icon(Icons.arrow_forward),
-                onTap: () {},
+                onTap: () {
+                   Navigator.push(
+    context,
+    MaterialPageRoute(builder: (_) => AddChildPage()),
+  );
+                },
               ),
             ),
 
