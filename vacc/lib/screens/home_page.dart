@@ -6,34 +6,9 @@ import 'appointment_page.dart';
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF0F8FF),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF6C63FF),
-        title: const Text("Home"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            _card(context, "Add Child", Icons.child_care, const AddChildPage()),
-            _card(context, "Vaccination Schedule", Icons.medical_services, const VaccinationPage()),
-            _card(context, "Appointments", Icons.event, const AppointmentPage()),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _card(BuildContext context, String title, IconData icon, Widget page) {
+  Widget card(BuildContext context, String title, Widget page) {
     return Card(
-      elevation: 6,
-      margin: const EdgeInsets.only(bottom: 15),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: ListTile(
-        leading: Icon(icon, color: const Color(0xFF6C63FF)),
         title: Text(title),
         trailing: const Icon(Icons.arrow_forward),
         onTap: () {
@@ -42,6 +17,24 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute(builder: (_) => page),
           );
         },
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF0F8FF),
+      appBar: AppBar(title: const Text("Home")),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            card(context, "Add Child", const AddChildPage()),
+            card(context, "Vaccination", const VaccinationPage()),
+            card(context, "Appointments", const AppointmentPage()),
+          ],
+        ),
       ),
     );
   }

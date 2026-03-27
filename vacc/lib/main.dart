@@ -7,10 +7,12 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,9 +20,9 @@ class MyApp extends StatelessWidget {
       title: 'Vaccination App',
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginPage(),
-        '/signup': (context) => SignupPage(),
-        '/home': (context) => HomePage(),
+        '/': (context) => const LoginPage(),
+        '/signup': (context) => const SignupPage(),
+        '/home': (context) => const HomePage(),
       },
     );
   }
