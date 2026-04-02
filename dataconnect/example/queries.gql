@@ -1,0 +1,65 @@
+query ListChildrenAndVaccinationRecords @auth(level: USER) {
+  children(where: { parent: { id_expr: "auth.uid" } }) {
+    id
+    name
+    dateOfBirth
+    gender
+    bloodType
+    parent {
+      displayName
+    }
+    vaccinationRecords_on_child(orderBy: [{ vaccinationDate: DESC }]) {
+      id
+      vaccine {
+        name
+        targetDisease
+      }
+      vaccinationDate
+      administeredBy
+      notes
+      nextDoseDate
+    }
+  }
+}
+
+query GetVaccinationRecordById($id: UUID!) @auth(level: USER) {
+  vaccinationRecord(id: $id) {
+    id
+    vaccinationDate
+    administeredBy
+    notes
+    nextDoseDate
+    child {
+      name
+    }
+    vaccine {
+      name
+    }
+  }
+}
+
+mutation CreateChildForCurrentUser(
+  $name: String!
+  $dateOfBirth: Date!
+  $gender: String!
+  $bloodType: String
+) @auth(level: USER) {
+  child_insert(
+    data: {
+      name: $name
+      dateOfBirth: $dateOfBirth
+      gender: $gender
+      bloodType: $bloodType
+      parentId_expr: "auth.uid"
+      createdAt_expr: "request.time"
+    }
+  ) {
+    id
+  }
+}
+
+mutation DismissReminder($id: UUID!) @auth(level: USER) {
+  reminder_update(key: { id: $id }, data: { isDismissed: true }) {
+    id
+  }
+}

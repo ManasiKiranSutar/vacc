@@ -1,0 +1,44 @@
+type Parent @table {
+  displayName: String!
+  createdAt: Timestamp!
+  email: String
+  phoneNumber: String
+}
+
+type Child @table {
+  parent: Parent!
+  name: String!
+  dateOfBirth: Date!
+  gender: String!
+  createdAt: Timestamp!
+  bloodType: String
+}
+
+type Vaccine @table {
+  name: String!
+  targetDisease: String!
+  recommendedAgeGroup: String!
+  createdAt: Timestamp!
+  description: String
+  manufacturer: String
+}
+
+type VaccinationRecord @table {
+  child: Child!
+  vaccine: Vaccine!
+  vaccinationDate: Date!
+  createdAt: Timestamp!
+  administeredBy: String
+  notes: String
+  nextDoseDate: Date
+}
+
+type Reminder @table {
+  child: Child!
+  vaccine: Vaccine!
+  reminderDate: Date!
+  reminderTime: String!
+  message: String!
+  createdAt: Timestamp!
+  isDismissed: Boolean
+}

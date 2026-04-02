@@ -8,6 +8,7 @@ class HomePage extends StatelessWidget {
 
   Widget card(BuildContext context, String title, Widget page) {
     return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
         title: Text(title),
         trailing: const Icon(Icons.arrow_forward),
@@ -24,12 +25,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F8FF),
       appBar: AppBar(title: const Text("Home")),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
+            /// Logo on top
+            Image.asset("assets/images/logo.png", height: 80),
+
+            const SizedBox(height: 20),
+
             card(context, "Add Child", const AddChildPage()),
             card(context, "Vaccination", const VaccinationPage()),
             card(context, "Appointments", const AppointmentPage()),
