@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:vacc/screens/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,30 +14,34 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  void login() async {
-    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please fill all fields")),
-      );
-      return;
-    }
+  Future login() async {
+  print("Login clicked");
 
-    try {
-      await _auth.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
+  try {
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
 
-      Navigator.pushReplacementNamed(context, '/home');
-    } on FirebaseAuthException catch (e) {
-      String message = "Login failed";
-      if (e.code == 'user-not-found') message = "Email not found";
-      if (e.code == 'wrong-password') message = "Wrong password";
-      
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+    print("Login success");
+
+    if (userCredential.user != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
     }
+  } on FirebaseAuthException catch (e) {
+    print("Firebase Error: ${e.message}");
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(e.message ?? "Login failed")),
+    );
+  } catch (e) {
+    print("Other Error: $e");
   }
-
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
