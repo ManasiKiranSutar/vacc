@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '413722735019',
     projectId: 'vacc-c08c6',
     storageBucket: 'vacc-c08c6.firebasestorage.app',
+    iosClientId: '413722735019-dsmb5jui8glhii92gfmosrsnjcnald6g.apps.googleusercontent.com',
     iosBundleId: 'com.example.vacc',
   );
 
@@ -72,6 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '413722735019',
     projectId: 'vacc-c08c6',
     storageBucket: 'vacc-c08c6.firebasestorage.app',
+    iosClientId: '413722735019-dsmb5jui8glhii92gfmosrsnjcnald6g.apps.googleusercontent.com',
     iosBundleId: 'com.example.vacc',
   );
 
